@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2021 at 11:08 AM
+-- Generation Time: Jun 25, 2021 at 06:13 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -20,6 +20,42 @@ SET time_zone = "+00:00";
 --
 -- Database: `yii2basic`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banyak_mahasiswa`
+--
+
+CREATE TABLE `banyak_mahasiswa` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `nomor_bp` varchar(50) NOT NULL,
+  `id_jurusan` int(11) DEFAULT NULL,
+  `id_prodi` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banyak_prodi`
+--
+
+CREATE TABLE `banyak_prodi` (
+  `id` int(11) NOT NULL,
+  `id_jurusan` int(11) NOT NULL,
+  `prodi` varchar(50) NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `banyak_prodi`
+--
+
+INSERT INTO `banyak_prodi` (`id`, `id_jurusan`, `prodi`, `keterangan`) VALUES
+(1, 1, 'Teknologi Rekayasa Perangkat Lunak', 'D4'),
+(2, 2, 'Teknik Sipil', 'D3'),
+(3, 3, 'Teknik Mesin', 'D3');
 
 -- --------------------------------------------------------
 
@@ -232,6 +268,30 @@ INSERT INTO `giisupplier` (`id`, `nama_supplier`, `notelp`, `email`, `alamat`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `informasi_ujian`
+--
+
+CREATE TABLE `informasi_ujian` (
+  `nomor_pendaftaran` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `kota_ujian` varchar(50) NOT NULL,
+  `lokasi_ujian` varchar(50) NOT NULL,
+  `id_sekolah` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `informasi_ujian`
+--
+
+INSERT INTO `informasi_ujian` (`nomor_pendaftaran`, `nama`, `kota_ujian`, `lokasi_ujian`, `id_sekolah`) VALUES
+(1, 'Ali Amir', 'Padang', 'SMAN 1 Padang', 'P0001'),
+(2, 'Bellina M', 'Padang', 'SMAN 2 Padang', 'P0002'),
+(3, 'Cika', 'Bukittinggi', 'SMAN 1 Bukittinggi', 'B0001'),
+(4, 'Deni', 'Bukittinggi', 'SMAN 2 Bukittinggi', 'B0002');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jenis`
 --
 
@@ -252,6 +312,27 @@ INSERT INTO `jenis` (`id`, `nama_jenis`, `keterangan`) VALUES
 (4, 'Minuman Sehat', 'Minuman sehat, segar dan nikmat'),
 (5, 'Minuman Ringan', 'Minuman ringan yang nikmat'),
 (6, 'Minuman herbal', 'Minuman herbal yang alami dan nikmat');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jurusan`
+--
+
+CREATE TABLE `jurusan` (
+  `id` int(11) NOT NULL,
+  `KodeJurusan` varchar(20) NOT NULL,
+  `NamaJurusan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jurusan`
+--
+
+INSERT INTO `jurusan` (`id`, `KodeJurusan`, `NamaJurusan`) VALUES
+(1, 'TI', 'Teknologi Informasi'),
+(2, 'TS', 'Teknik Sipil'),
+(3, 'TM', 'Teknik Mesin');
 
 -- --------------------------------------------------------
 
@@ -283,6 +364,29 @@ INSERT INTO `kamar_pasien` (`id_kamar`, `lantai`, `tipe_kamar`) VALUES
 ('CS001', 3, 'VIP'),
 ('CS002', 3, 'VIP'),
 ('D001', 4, 'Reguler');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lokasi_sekolah`
+--
+
+CREATE TABLE `lokasi_sekolah` (
+  `id_sekolah` varchar(10) NOT NULL,
+  `nama_sekolah` varchar(50) NOT NULL,
+  `kota` varchar(50) NOT NULL,
+  `alamat` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `lokasi_sekolah`
+--
+
+INSERT INTO `lokasi_sekolah` (`id_sekolah`, `nama_sekolah`, `kota`, `alamat`) VALUES
+('B0001', 'SMAN 1 Bukittinggi', 'Bukittinggi', 'Jl.Syekh Jamil Jambek'),
+('B0002', 'SMAN 2 Bukittinggi', 'Bukittinggi', 'Jl.Sudirman'),
+('P0001', 'SMAN 1 Padang', 'Padang', 'Jl.Belanti Raya'),
+('P0002', 'SMAN 2 Padang', 'Padang', 'Jl.Musi');
 
 -- --------------------------------------------------------
 
@@ -423,6 +527,22 @@ INSERT INTO `tb_benchmark` (`id`, `framework`, `nilai`, `penggunaan`) VALUES
 --
 
 --
+-- Indexes for table `banyak_mahasiswa`
+--
+ALTER TABLE `banyak_mahasiswa`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idJurusan` (`id_jurusan`),
+  ADD KEY `idProdi` (`id_prodi`);
+
+--
+-- Indexes for table `banyak_prodi`
+--
+ALTER TABLE `banyak_prodi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idJurusan` (`id_jurusan`),
+  ADD KEY `idJurusan_2` (`id_jurusan`);
+
+--
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
@@ -474,6 +594,13 @@ ALTER TABLE `giisupplier`
   ADD KEY `id_supllier_idx` (`id`);
 
 --
+-- Indexes for table `informasi_ujian`
+--
+ALTER TABLE `informasi_ujian`
+  ADD PRIMARY KEY (`nomor_pendaftaran`),
+  ADD KEY `idSekolah` (`id_sekolah`);
+
+--
 -- Indexes for table `jenis`
 --
 ALTER TABLE `jenis`
@@ -481,10 +608,22 @@ ALTER TABLE `jenis`
   ADD KEY `id_jenis_idx` (`id`);
 
 --
+-- Indexes for table `jurusan`
+--
+ALTER TABLE `jurusan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kamar_pasien`
 --
 ALTER TABLE `kamar_pasien`
   ADD PRIMARY KEY (`id_kamar`);
+
+--
+-- Indexes for table `lokasi_sekolah`
+--
+ALTER TABLE `lokasi_sekolah`
+  ADD PRIMARY KEY (`id_sekolah`);
 
 --
 -- Indexes for table `mahasiswa`
@@ -522,6 +661,18 @@ ALTER TABLE `tb_benchmark`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `banyak_mahasiswa`
+--
+ALTER TABLE `banyak_mahasiswa`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `banyak_prodi`
+--
+ALTER TABLE `banyak_prodi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `barang`
@@ -566,10 +717,22 @@ ALTER TABLE `giisupplier`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `informasi_ujian`
+--
+ALTER TABLE `informasi_ujian`
+  MODIFY `nomor_pendaftaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `jenis`
 --
 ALTER TABLE `jenis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `jurusan`
+--
+ALTER TABLE `jurusan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
@@ -606,10 +769,29 @@ ALTER TABLE `tb_benchmark`
 --
 
 --
+-- Constraints for table `banyak_mahasiswa`
+--
+ALTER TABLE `banyak_mahasiswa`
+  ADD CONSTRAINT `idJurusan` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id`),
+  ADD CONSTRAINT `idProdi` FOREIGN KEY (`id_prodi`) REFERENCES `banyak_prodi` (`id`);
+
+--
+-- Constraints for table `banyak_prodi`
+--
+ALTER TABLE `banyak_prodi`
+  ADD CONSTRAINT `prodi_ibfk_1` FOREIGN KEY (`id_jurusan`) REFERENCES `jurusan` (`id`);
+
+--
 -- Constraints for table `daftar_buku`
 --
 ALTER TABLE `daftar_buku`
   ADD CONSTRAINT `Buat` FOREIGN KEY (`kategori_id`) REFERENCES `daftar_kategori_buku` (`id`);
+
+--
+-- Constraints for table `informasi_ujian`
+--
+ALTER TABLE `informasi_ujian`
+  ADD CONSTRAINT `idSekolah` FOREIGN KEY (`id_sekolah`) REFERENCES `lokasi_sekolah` (`id_sekolah`);
 
 --
 -- Constraints for table `mahasiswa`
