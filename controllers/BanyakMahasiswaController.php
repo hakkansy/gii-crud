@@ -137,5 +137,6 @@ class BanyakMahasiswaController extends Controller
                 return ['output'=>$out,'selected'=>''];
             }
         }
+        return ['output'=>'','selected'=>''];
     }
 }

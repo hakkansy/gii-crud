@@ -55,19 +55,24 @@ class BanyakProdi extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getJurusan()
-    {
-        return $this->hasOne(Jurusan::className(), ['id' => 'id_jurusan']);
-    }
 
-    public static function getBanyakProdiList($jurusanID, $dependent = false)
+
+    public static function getBanyakProdiList($cat_id, $dependent = false)
     {
-        $subCategory = self::find() 
+        $subCategory = self::find()
+            ->where(['id_jurusan'=> $cat_id]);
+        /*$subCategory = self::find() 
             ->select(['prodi as name','id'])
             ->where(['id_jurusan'=> $jurusanID])
             ->asArray()
             ->all();
 
-        return $subCategory;
+        return $subCategory;*/
+
+        if ($dependent == "") {
+            return $subCategory->select(['id','prodi as name'])->asArray()->all();
+        }else{
+            return $subCategory->select(['prodi'])->indexBy('id')->column();
+        }
     }
 }

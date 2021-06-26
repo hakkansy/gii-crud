@@ -56,4 +56,9 @@ class Jurusan extends \yii\db\ActiveRecord
     {
         return $this->hasMany(BanyakProdi::className(), ['id_jurusan' => 'id']);
     }
+
+    public static function getJurusan()
+    {
+        return Self::find()->select(['NamaJurusan'])->indexBy('id')->column();
+    }
 }

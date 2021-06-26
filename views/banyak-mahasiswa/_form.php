@@ -25,12 +25,12 @@ use kartik\depdrop\DepDrop;
     ?>
 
     <?= $form->field($model, 'id_prodi')->widget(DepDrop::classname(),[
-    	'data'=>BanyakProdi::getBanyakProdiList($model->id_jurusan),
-    	'options'=>['id'=>'banyak_prodi','prompt'=>'Select Prodi...'],
+    	'data'=>BanyakProdi::getBanyakProdiList($model->id_jurusan,$model->nomor_bp),
+    	'options'=>['id'=>'prodi','prompt'=>'Select Prodi...'],
     	'pluginOptions'=>[
     		'depends'=> ['jurusan'],
     		'placeholder'=>'Select Prodi...',
-    		'url'=>Url::to(['banyak_mahasiswa/subcat'])
+    		'url'=>Url::to(['banyak-mahasiswa/subcat'])
     	]
     ])
  ?>

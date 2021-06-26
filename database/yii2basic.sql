@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2021 at 06:13 PM
+-- Generation Time: Jun 26, 2021 at 12:37 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -35,6 +35,15 @@ CREATE TABLE `banyak_mahasiswa` (
   `id_prodi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `banyak_mahasiswa`
+--
+
+INSERT INTO `banyak_mahasiswa` (`id`, `nama`, `nomor_bp`, `id_jurusan`, `id_prodi`) VALUES
+(1, 'Andi Irham', '1911082006', 1, 1),
+(2, 'Baim Wong', '1911061019', 2, 2),
+(3, 'Calvin Klein', '2010022291', 3, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +64,8 @@ CREATE TABLE `banyak_prodi` (
 INSERT INTO `banyak_prodi` (`id`, `id_jurusan`, `prodi`, `keterangan`) VALUES
 (1, 1, 'Teknologi Rekayasa Perangkat Lunak', 'D4'),
 (2, 2, 'Teknik Sipil', 'D3'),
-(3, 3, 'Teknik Mesin', 'D3');
+(3, 3, 'Teknik Mesin', 'D3'),
+(4, 3, 'Teknik Manufaktur', 'D4');
 
 -- --------------------------------------------------------
 
@@ -666,13 +676,13 @@ ALTER TABLE `tb_benchmark`
 -- AUTO_INCREMENT for table `banyak_mahasiswa`
 --
 ALTER TABLE `banyak_mahasiswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `banyak_prodi`
 --
 ALTER TABLE `banyak_prodi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `barang`
